@@ -1,0 +1,28 @@
+{
+  "name": "cashkick",
+  "version": "1.0.0",
+  "description": "Provides all cashkick service which includes monthly payment and contracts associated with it",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.8.2",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.7",
+    "swagger-ui-express": "^4.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sweta008/cashKick.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sweta008/cashKick/issues"
+  },
+  "homepage": "https://github.com/sweta008/cashKick#readme"
+}

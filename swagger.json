@@ -1,0 +1,506 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Cashkick",
+        "description": "A simple demonstration of cashkick and payment",
+        "version": "1.0"
+    },
+    "schemes": ["http"],
+    "host": "localhost:3080",
+    "basePath": "/api",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/{contracts}/payments": {
+            "get": {
+                "operationId": "getMyPayments",
+                "tags": [
+                    "Payments"
+                ],
+                "description": "This service is used for fetch all payments related to cashkick.",
+                "parameters": [
+                    {
+                        "name": "customerId",
+                        "in": "path",
+                        "description": "The payments needs to be fetched on the basis of cashkick",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "postTanents",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for register new tenants.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenantname that needs to be add",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "type": "object",
+                            "name": "tenants",
+                            "properties": {
+                                "tenants": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        },
+                                        "isSaasEnabled": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                },
+                "security": [
+                    {
+                        "slack": [
+                            "identity.basic",
+                            "identity.email"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/{tenantname}/tenants/{id}": {
+            "get": {
+                "operationId": "getTanentById",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is usedfor fetch tanents by name.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteTenants",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is usedfor fetch tanents by name.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            }
+        },
+        "/{tenantname}/tenants/name/{name}": {
+            "get": {
+                "operationId": "getTanentByName",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is usedfor fetch tanents by name.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The Name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "deleteTanentByName",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for delete tanents by name.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The Name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            }
+        },
+        "/{tenantname}/settings/color-accessibility": {
+            "get": {
+                "operationId": "getTanentAccessibility",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for fetch tenants color accessiblity.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "putTanentAccessibility",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for fetch tenants color accessiblity.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "colorAccessibility",
+                        "in": "formData",
+                        "description": "color accessiblity to be enabled/disabled",
+                        "required": true,
+                        "type": "boolean",
+                        "default": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            }
+        },
+        "/{tenantname}/cttool": {
+            "get": {
+                "operationId": "getTenantCtTool",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for fetch tanents tool based on tanent name.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            },
+            "post": {
+                "operationId": "add ct tool",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for add cttool for tenants.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "nessusId",
+                        "in": "formData",
+                        "description": "The nessusId that needs to be update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "active",
+                        "in": "formData",
+                        "description": "activate the ct tool to be enabled/disabled",
+                        "required": true,
+                        "type": "boolean",
+                        "default": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "data not found"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied"
+                    }
+                }
+            }
+        },
+        "/{tenantname}/settings/remove-policy/suspended-resources": {
+            "get": {
+                "operationId": "getSuspendedResource",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for fetch suspended resources.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "remPolicyforSuspRes",
+                "tags": [
+                    "Tenants"
+                ],
+                "description": "This service is used for update remove policy for suspend resources.",
+                "parameters": [
+                    {
+                        "name": "tenantname",
+                        "in": "path",
+                        "description": "The tenant name that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "removePolicy",
+                        "in": "formData",
+                        "description": "remove policy true / false",
+                        "required": true,
+                        "type": "boolean",
+                        "default": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data supplied",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ApiResponse": {
+            "properties": {
+                "status": {
+                    "type": "object"
+                },
+                "statusCode": {
+                    "type": "number"
+                },
+                "data": {
+                    "type": "object"
+                }
+            }
+        },
+        "postTenants": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "admin": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "isSaasEnabled": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
