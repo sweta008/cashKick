@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require("body-parser");
-const routes = require('./routes');
+const router = require("./routes/index")
 const morgan = require('morgan');
 const swaggerJSDOC = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -22,7 +22,7 @@ app.use(bodyParser.json({type: "application/*+json"}));
 //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/usersdb',
+mongoose.connect('mongodb://localhost:27017/cashkickdb',
 {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -45,9 +45,11 @@ app.listen(port, () => {
     console.log(`Server listening on the port::::::${port}`);
 });
 
+app.use('/', router);
+
 process.on('uncaughtException', function (err) {
     console.log(err);
-    logger.error('Error stack' + err.stack);
+    //logger.error('Error stack' + err.stack);
 });
 
 module.exports = app;
